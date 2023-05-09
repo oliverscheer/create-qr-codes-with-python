@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -41,10 +41,14 @@
         </nav>
 
         <!-- Content -->
-        <h2>Your QR Code</h2>
-        <img src="{{ path }}" alt="Your QR Code">
-        <p>Please test before use.</p>
+        <form method="POST" action="/url">
+            <div class="mb-3">
+                <label for="url" class="form-label">URL / Link</label>
+                <input type="text" class="form-control" id="url" name="url" placeholder="https://www.somepage.com">
+            </div>
 
+            <button type="submit" class="btn btn-primary">Create QR Code</button>
+        </form>
     </div>
 </body>
 

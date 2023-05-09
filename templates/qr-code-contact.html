@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -41,10 +41,29 @@
         </nav>
 
         <!-- Content -->
-        <h2>Your QR Code</h2>
-        <img src="{{ path }}" alt="Your QR Code">
-        <p>Please test before use.</p>
+        <form method="POST" action="/contact">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Your name">
+            </div>
 
+            <div class="mb-3">
+                <label for="email" class="form-label">E-Mail</label>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Your e-mail">
+            </div>
+
+            <div class="mb-3">
+                <label for="url" class="form-label">Your homepage</label>
+                <input type="text" class="form-control" id="url" name="url" placeholder="Your homepage">
+            </div>
+
+            <div class="mb-3">
+                <label for="Phone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Your phone number">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create QR Code</button>
+        </form>
     </div>
 </body>
 
