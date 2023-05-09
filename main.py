@@ -88,17 +88,14 @@ def about():
 
 @app.route('/download', methods=['POST'])
 def download_file():
+    # Specify the path to the file to be downloaded
     file_path = request.form.get('file_path')
 
-    # Specify the path to the file to be downloaded
-    # file_path = 'path/to/file.pdf'
     # Set the filename that will be presented to the user upon download
     filename = 'qrcode.png'
     # Return the file to the client for download
     return send_file(file_path, as_attachment=True, download_name=filename)
-    # return send_file(file_path, attachment_filename=filename, as_attachment=True)
-    # return send_file(file_path)
-    # return 'File: ' + file_path
+
 
 
 if __name__ == '__main__':
