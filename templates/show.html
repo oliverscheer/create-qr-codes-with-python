@@ -44,6 +44,12 @@
         <h2>Your QR Code</h2>
         <img src="{{ path }}" alt="Your QR Code">
         <p>Please test before use.</p>
+        <div>
+            <form method="POST" action="/download">
+                <input type="hidden" class="form-control" id="file_path" name="file_path" value="{{ path }}">
+                <button type="submit" class="btn btn-primary">Download QR Code</button>
+            </form>
+        </div>
 
     </div>
 </body>

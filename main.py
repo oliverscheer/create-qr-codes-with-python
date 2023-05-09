@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from segno import helpers
 
 import uuid
@@ -78,9 +78,28 @@ def create_url_qrcode():
     qrcode.save(path, scale=scale)
     return render_template('show.html', path=path)
 
+# About
+
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+# Download
+
+@app.route('/download', methods=['POST'])
+def download_file():
+    file_path = request.form.get('file_path')
+
+    # Specify the path to the file to be downloaded
+    # file_path = 'path/to/file.pdf'
+    # Set the filename that will be presented to the user upon download
+    filename = 'qrcode.png'
+    # Return the file to the client for download
+    return send_file(file_path, as_attachment=True, download_name=filename)
+    # return send_file(file_path, attachment_filename=filename, as_attachment=True)
+    # return send_file(file_path)
+    # return 'File: ' + file_path
+
 
 if __name__ == '__main__':
     app.run()
