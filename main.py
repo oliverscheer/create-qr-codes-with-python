@@ -97,6 +97,8 @@ def download_file():
     return send_file(file_path, as_attachment=True, download_name=filename)
 
 
+def run():
+    app.run()
 
 if __name__ == '__main__':
-    app.run()
+    run()
