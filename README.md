@@ -9,3 +9,9 @@ Open the project in the DevContainer in Visual Studio Code.
 ## Open Tasks
 
 - There is no cleanup for the generated QR codes. They should be deleted within a few minutes after creation.
+
+
+
+```bash
+git config --global --add safe.directory /workspaces/create-qr-codes-with-python
+```
