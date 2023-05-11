@@ -23,6 +23,10 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Run deployment script
+        env:
+          RESOURCE_GROUP_NAME: 'rg-qr-code-app'
+          WEB_APP_NAME: 'qr-code-app'
+          LOCATION: 'westeurope'
         run: |
           echo "deployment script running..."
           chmod +x deploy.sh
