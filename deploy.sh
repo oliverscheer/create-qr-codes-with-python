@@ -1,10 +1,9 @@
 #!/bin/bash
 
-
-export RESOURCE_GROUP_NAME=rg-test-1
-export LOCATION=westeurope
-export WEB_APP_NAME=oscheertestqrcode2
-export SKU=B1
+# export RESOURCE_GROUP_NAME=rg-test-1
+# export LOCATION=westeurope
+# export WEB_APP_NAME=oscheertestqrcode2
+# export SKU=B1
 
 echo "QR Code Generator Installer"
 
