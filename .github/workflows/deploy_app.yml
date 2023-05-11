@@ -25,4 +25,5 @@ jobs:
       - name: Run deployment script
         run: |
           echo "deployment script running..."
+          chmod +x deploy.sh
           ./deploy.sh
