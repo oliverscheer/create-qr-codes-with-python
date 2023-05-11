@@ -24,8 +24,8 @@ jobs:
 
       - name: Run deployment script
         env:
-          RESOURCE_GROUP_NAME: 'rg-qr-code-app'
-          WEB_APP_NAME: 'qr-code-app'
+          RESOURCE_GROUP_NAME: 'rg-qrcode'
+          WEB_APP_NAME: 'oscheerqrcode'
           LOCATION: 'westeurope'
           SKU: 'B1'
         run: |
