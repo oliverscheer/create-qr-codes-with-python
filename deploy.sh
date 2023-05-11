@@ -1,15 +1,20 @@
 #!/bin/bash
 
+
+export RESOURCE_GROUP_NAME=rg-test-1
+export LOCATION=westeurope
+export WEB_APP_NAME=oscheertestqrcode2
+export SKU=B1
+
 echo "QR Code Generator Installer"
 
-# Check Login
-# az configure --defaults output=json
+# Check if user is logged in
 az account show
 if [ $? -eq 1 ]; then
   exit 1
 fi
 
-# Check Variables
+# Check required environment variables
 if [ -n "$RESOURCE_GROUP_NAME" ]; then
     echo "RESOURCE_GROUP_NAME: $RESOURCE_GROUP_NAME"
 else
@@ -42,26 +47,25 @@ else
     az group create --name $RESOURCE_GROUP_NAME --location $LOCATION
 fi
 
-app_serviceplan_name="asp-$WEB_APP_NAME"
+APP_SERVICE_PLAN="asp-$WEB_APP_NAME"
 
 echo "Creating App Service Plan"
 az appservice plan create \
-    --name $app_serviceplan_name \
+    --name $APP_SERVICE_PLAN \
     --is-linux \
     --resource-group $RESOURCE_GROUP_NAME \
-    --sku B1
+    --sku $SKU
 
 if [ $? -eq 1 ]; then
   exit 1
 fi
-
 
 echo "Creating Web App create"
 az webapp create \
     --name $WEB_APP_NAME \
     --runtime "PYTHON|3.11" \
     --resource-group $RESOURCE_GROUP_NAME \
-    --plan $app_serviceplan_name
+    --plan $APP_SERVICE_PLAN
 
 if [ $? -eq 1 ]; then
   exit 1
@@ -73,38 +77,19 @@ az webapp config appsettings set \
     --resource-group $RESOURCE_GROUP_NAME \
     --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
 
-
 echo "Creating Web App up"
 az webapp up \
-    --plan $app_serviceplan_name \
+    --plan $APP_SERVICE_PLAN \
     --name $WEB_APP_NAME \
     --resource-group $RESOURCE_GROUP_NAME \
     --location $LOCATION \
     --runtime "PYTHON|3.11"
 
-# az webapp deployment source config-local-git \
-#     --name $WEB_APP_NAME \
-#     --resource-group $RESOURCE_GROUP_NAME
-
-# if [ $? -eq 1 ]; then
-#   exit 1
-# fi
-
-# az webapp deployment source sync \
-#     --name $WEB_APP_NAME \
-#     --resource-group $RESOURCE_GROUP_NAME
-
-# if [ $? -eq 1 ]; then
-#   exit 1
-# fi
-
-# zip -r app.zip .
-
-# echo "Deploying Web App"
-# az webapp deploy \
-#     --name $WEB_APP_NAME \
-#     --resource-group $RESOURCE_GROUP_NAME \
-#     --src-path app.zip
+echo "Update startup command"
+az webapp config set \
+    --resource-group $RESOURCE_GROUP_NAME \
+    --name $WEB_APP_NAME \
+    --startup-file "gunicorn --bind=0.0.0.0 --timeout 600 main:app"
 
 echo "Configuring Web App"
 az webapp config appsettings set \
@@ -132,16 +117,18 @@ if [ $? -eq 1 ]; then
 fi
 
 echo "Getting Web App URL"
-az webapp show \
+WEB_APP_URL=$(az webapp show \
     --name $WEB_APP_NAME \
     --resource-group $RESOURCE_GROUP_NAME \
     --query defaultHostName \
-    --output tsv
+    --output tsv)
+echo $WEB_APP_URL
 
 if [ $? -eq 1 ]; then
   exit 1
 fi
 
-# run tests
+echo "Web app installed successful: $WEB_APP_URL"
 
 # destroy everything
+# az group delete --name $RESOURCE_GROUP_NAME --yes --no-wait
