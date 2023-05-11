@@ -52,11 +52,12 @@ def create_address_qrcode():
     url = request.form.get('url')
     phone = request.form.get('phone')
 
-    qrcode = helpers.make_mecard(
+    qrcode = helpers.make_vcard(
         name=name,
-        email=email,
-        url=url,
-        phone=phone,
+        displayname=name,
+        email=(email),
+        url=[url],
+        phone=phone
     )
     guid = str(uuid.uuid4())
     path = "static/qrcodes/" + guid + ".png"
