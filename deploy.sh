@@ -1,5 +1,6 @@
 #!/bin/bash
 
+APP_SERVICE_PLAN=asp-$WEB_APP_NAME
 
 echo "Creating Web App up"
 az webapp up \
