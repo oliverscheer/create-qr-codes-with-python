@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "QR Code Generator Installer"
+echo "Setup Infrastructure for QR Code Generator App"
 
 # Check if user is logged in
 az account show
@@ -85,6 +85,7 @@ fi
 echo "Create Service Principal"
 SUBSCRIPTION_ID=$(az account show --query id --output tsv)
 SERVICE_PRINCIPAL_NAME=sp-$WEB_APP_NAME
+echo "SERVICE_PRINCIPAL_NAME: $SERVICE_PRINCIPAL_NAME"
 
 az ad sp create-for-rbac \
     --name $SERVICE_PRINCIPAL_NAME \
