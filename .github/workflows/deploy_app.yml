@@ -27,6 +27,7 @@ jobs:
           RESOURCE_GROUP_NAME: 'rg-qr-code-app'
           WEB_APP_NAME: 'qr-code-app'
           LOCATION: 'westeurope'
+          SKU: 'B1'
         run: |
           echo "deployment script running..."
           chmod +x deploy.sh
