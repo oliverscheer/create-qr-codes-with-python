@@ -80,6 +80,8 @@ After this you should be able to open the web app under the link you got a few s
 
 - Coming soon, a deployment via bicep
 
+- Main branch is protected and requires puöl requests
+
 ## Summary
 
 I hope you enjoyed the demo. If you have questions feel free to comment.
