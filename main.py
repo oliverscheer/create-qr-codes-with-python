@@ -7,6 +7,7 @@ import segno
 app = Flask(__name__)
 scale = 10
 
+# Root page
 @app.route('/')
 def home():
     return render_template('index.html')
