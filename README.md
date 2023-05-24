@@ -78,6 +78,8 @@ After this you should be able to open the web app under the link you got a few s
 
     This is a very easy to setup step, but requires manually interaction on the portal, or additional scripts.
 
+- Coming soon, a deployment via bicep
+
 ## Summary
 
 I hope you enjoyed the demo. If you have questions feel free to comment.
